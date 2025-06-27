@@ -1,0 +1,22 @@
+def assess_password_complexity(password):
+    feedback = []
+
+    if len(password) < 8:
+        feedback.append("Password must be at least 8 characters long.")
+    if not any(char.isupper() for char in password):
+        feedback.append("Password must contain at least one uppercase letter.")
+    if not any(char.islower() for char in password):
+        feedback.append("Password must contain at least one lowercase letter.")
+    if not any(char.isdigit() for char in password):
+        feedback.append("Password must contain at least one number.")
+    if not any(char in "!@#$%^&*(),.?\":{}|<>" for char in password):
+        feedback.append("Password must contain at least one special character.")
+
+    return "Password is strong." if not feedback else "\n".join(feedback)
+
+while True:
+    password = input("Enter your password: ")
+    result = assess_password_complexity(password)
+    print(result)
+    if result == "Password is strong.":
+        break

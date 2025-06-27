@@ -1,0 +1,34 @@
+def caesar_encrypt(text, shift):
+    result = ""
+    for char in text:
+        if char.isalpha():
+            base = ord('A') if char.isupper() else ord('a')
+            result += chr((ord(char) - base + shift) % 26 + base)
+        else:
+            result += char
+    return result
+
+def caesar_decrypt(text, shift):
+    return caesar_encrypt(text, -shift)
+
+def main():
+    print("Caesar Cipher Encryption/Decryption")
+    choice = input("Type 'e' to encrypt or 'd' to decrypt: ").lower()
+    message = input("Enter your message: ")
+    try:
+        shift = int(input("Enter shift value (integer): "))
+    except ValueError:
+        print("Invalid shift value.")
+        return
+
+    if choice == 'e':
+        encrypted = caesar_encrypt(message, shift)
+        print("Encrypted message:", encrypted)
+    elif choice == 'd':
+        decrypted = caesar_decrypt(message, shift)
+        print("Decrypted message:", decrypted)
+    else:
+        print("Invalid choice.")
+
+if __name__ == "__main__":
+    main()
